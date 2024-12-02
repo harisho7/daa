@@ -125,9 +125,13 @@ try:
                     }
                 ]
             },
+             "complete_my_list_eye": {
+             "#username": "Fawaz report"
+             },
             "fields": {
                 "overallFeedback": "Welcome"
-            },
+            }, 
+        
             "eye": [
                 {
                     "observation": "This is advanced.",
@@ -158,19 +162,24 @@ try:
             "textarea": {
                 "areaforDev": "Fixed",
                 "recLearnInitiative": "Correct"
+            },
+
+            "mindset_user": {
+                "#username": "Radhika"
             }
+
         }
 
 
 
 
-            #-------------second------------
+            #------------------------
     
 ##-----------------------------
 
 
 
-#-----------------
+        #--#---------------Technical_part----- --start-------
 
 
     # Wait until the username field is present
@@ -179,22 +188,17 @@ try:
  # Find the username field and enter the username from the data dictionary
     username_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#username")))  # Adjust the selector as needed
     username_field.send_keys(data["login_data"]["username"])  # Using the username from the data dictionary
-    
+    print(username_field.text)
+
     # Find the password field and enter the password from the data dictionary
     password_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#password")))  # Adjust the selector as needed
     password_field.send_keys(data["login_data"]["password"])  # Using the password from the data dictionary
+    print(password_field.text)
  # Submit the login form 
     password_field.submit()
 #---------------------------
 
     # Try switching to the iframe, if necessary
-   
-
-
-
-
-
-
 
 
 
@@ -225,17 +229,19 @@ try:
     filter_button = driver.find_element(By.XPATH, "//button[@id='collapseFilter']")
     time.sleep(3)
     filter_button.click()
-
+    print(filter_button.text)
     
     # Locate the option "Android Developer II" using XPath and click it
     android_option = driver.find_element(By.XPATH, "//select[@id='nomPosIdFilter_ID']/option[text()='Android Developer II']")
     time.sleep(3)
     android_option.click()
+    print(android_option.text)
 
         # Locate the button using XPath and click Apply Filters it
     apply_filter_button = driver.find_element(By.XPATH, "//button[@id='applyFilterId' and contains(text(), 'Apply Filters')]")
     time.sleep(3)
     apply_filter_button.click()
+    print(apply_filter_button.text)
 
 
 
@@ -243,6 +249,7 @@ try:
     wait = WebDriverWait(driver, 10)
     username_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#username")))
     username_field.send_keys(data["upcoming"]["username"])
+    print(username_field.text)
 
     # Optional: keep the window open for a few seconds to view results
  # Wait for the button with class 'btn' and 'p-1' to be clickable
@@ -269,54 +276,68 @@ try:
 #---------------------------
 # ---- Process Technical Sections ---- #
 
-    # ---- Fill Technical Sections ---- #
-    # ---- Fill Technical Sections ---- #
+
+
+
+    # Iterate through each technical section
     for section_index, technical_section in enumerate(data['technical']):
         print(f"Starting processing for technical section {section_index + 1}")
 
-        # Attempt to fill in the text areas
         try:
+            # Fill in the fields for the current technical section
             for key, value in technical_section.items():
                 print(f"Attempting to locate textarea with ID: {key} for value: {value}")
                 try:
+                    # Locate the textarea element by ID
                     textarea = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, key)))
                 except Exception as e:
                     print(f"Failed to locate element with ID: {key}. Error: {e}")
                     continue  # Skip to the next item if this fails
 
-                # Scroll the textarea into view
+                # Scroll the textarea into view and fill it
                 driver.execute_script("arguments[0].scrollIntoView(true);", textarea)
-
-                # Clear the field and input the value
                 textarea.clear()
-                time.sleep(2)  # Adjust wait as necessary
+                time.sleep(2)  # Optional wait for better visual confirmation
                 textarea.send_keys(value)
+
                 print(f"Successfully filled textarea with ID: {key}")
+
+            # Click the radio button (score3) for the current section
+            try:
+                score3_radio = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "score3")))
+                driver.execute_script("arguments[0].scrollIntoView(true);", score3_radio)
+                time.sleep(2)  # Optional wait
+                score3_radio.click()
+                print(f"Successfully clicked on score3 for technical section {section_index + 1}")
+            except Exception as e:
+                print(f"Error clicking on score3 for technical section {section_index + 1}: {e}")
+
+            # Click "Save & Next" button if it's not the last section
+            if section_index < len(data['technical']) - 1:
+                try:
+                    save_next_button = WebDriverWait(driver, 10).until(
+                        EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Save & Next')]"))
+                    )
+                    driver.execute_script("arguments[0].scrollIntoView(true);", save_next_button)
+                    time.sleep(2)  # Optional wait
+                    save_next_button.click()
+                    print(f"Successfully clicked 'Save & Next' for technical section {section_index + 1}")
+                    time.sleep(4)  # Wait for the next section to load
+                except Exception as e:
+                    print(f"Error clicking 'Save & Next' for technical section {section_index + 1}: {e}")
+            else:
+                print(f"Last technical section reached. Skipping 'Save & Next' button for section {section_index + 1}")
 
         except Exception as e:
             print(f"Error processing technical section {section_index + 1}: {e}")
-            continue  # Continue to next section even if there's an error
-
-        # Click on the radio button (score3) if needed
-        try:
-            score3_radio = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, "score3")))
-            driver.execute_script("arguments[0].scrollIntoView(true);", score3_radio)
-            time.sleep(2)  # Optional wait
-            score3_radio.click()
-            print(f"Successfully clicked on score3 for technical section {section_index + 1}")
-        except Exception as e:
-            print(f"Error clicking on score3 for technical section {section_index + 1}: {e}")
+            continue  # Proceed to the next section even if there's an error
 
 
 
 
-
-
+   
 
     # ---- Fill Technical Sections ---- #
-
-
-
 
 
 
@@ -335,13 +356,25 @@ try:
     # Click the link
     time.sleep(2)
     technical_link.click()
+    print(technical_link.text)
     time.sleep(2)
         # Find the <a> element by its XPath  --click completed--
-    completed_button = driver.find_element(By.XPATH, "//div[@id='complete']//a[contains(text(),'Completed')]")
+   
 
-    # Click the "Completed" link
-    time.sleep(3)
-    completed_button.click()
+    # Wait for the link to be clickable
+    try:
+        # Locate the link element using XPath
+        link_element = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'Completed')]")))
+        
+        # Click the link
+        time.sleep(3)
+        link_element.click()
+        print("Clicked on the 'Completed' link successfully.")
+
+    except Exception as e:
+        print("Error while clicking the 'Completed' link:", e)
+
+
 
 
                                             # completed click -------------apply filter success
@@ -353,6 +386,7 @@ try:
         )
     time.sleep(3)
     collapse_filter_button.click()
+    print(collapse_filter_button.text)
 
 
 
@@ -360,24 +394,31 @@ try:
     select_element = driver.find_element(By.XPATH, "//select[@id='nomPosIdFilter_ID']")
     time.sleep(3)
     select_element.click()
+    print(select_element.text)
 
 
-    # Now select the desired option by its visible text
-    option = driver.find_element(By.XPATH, "//option[text()='Full Stack Developer II']")
-    time.sleep(2)
+
+    # Wait until the option is present and clickable
+    option = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//option[text()='Full Stack Developer II']"))
+    )
     option.click()
+    print(option.text)
+
+
 
         # Click the "Apply Filters" button using XPath
     apply_filters_button = driver.find_element(By.XPATH, "//button[@id='applyFilterId']")
     time.sleep(2)
     apply_filters_button.click()
+    print(apply_filters_button.text)
     # Assuming 'data' is defined as per your previous structure
     username_to_fill = data["user_complete"]["username"]
 
     # Wait for the username field to be present and then send the username
     username_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#username")))
     username_field.send_keys(username_to_fill)
-
+    print(username_field.text)
         # Locate the button using XPath
     button = driver.find_element(By.XPATH, "//button[@data-bs-toggle='offcanvas' and @data-bs-target='#offcanvas1']")
 
@@ -410,7 +451,7 @@ try:
     # Initialize WebDriverWait
     wait = WebDriverWait(driver, 10)
 
-    # Process complete_eye
+    # ----------------Process complete_eye
     complete_eye = data["complete_eye"]
     for index, section_data in enumerate(complete_eye):
         try:
@@ -424,11 +465,12 @@ try:
                 driver.execute_script("arguments[0].scrollIntoView(true);", textarea)
 
                 # Clear the field and input the value
-                time.sleep(3)
+               
                 textarea.clear()
-                time.sleep(4)
+                time.sleep(2)
                 textarea.send_keys(value)
-                time.sleep(3)
+                print(textarea.text)
+                
 
         except Exception as e:
             print(f"Error processing complete_eye section {index + 1}: {e}")
@@ -449,7 +491,8 @@ try:
 
     # Optionally, add
 
-                                     #----------Technical completed code submit code and ---------print submit success 
+             #----------Technical completed code submit code and ---------print submit success 
+
     # Locate the button using XPath
     submit_button = driver.find_element(By.XPATH, "//button[@id='submitResponse']")
 
@@ -473,112 +516,116 @@ try:
 
    #----------Locate the button using XPath---------- close button completed
 
-    time.sleep(10)
+    
     button = driver.find_element(By.XPATH, "//button[@type='button' and @class='btn-close text-reset' and @aria-label='Close']")
     # Click the button
     time.sleep(10)
     button.click()
+    print(button.text)
 
 
 
 
 
-
-    # Wait until the "CV" button is visible and clickable
-    try:
-        # Use class name and text to locate the element
-        cv_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'dropdown-item btn') and contains(@dmx-bind:href, 's3-file-download')]"))
-        )
-
-        # Scroll the element into view (optional if it's off-screen)
-        driver.execute_script("arguments[0].scrollIntoView(true);", cv_button)
-
-        # Click the button
-        time.sleep(3)
-        cv_button.click()
-        print("Successfully clicked the CV button!")
-
-    except Exception as e:
-        print(f"Error clicking the CV button: {e}")
-
-        #--CV --notification_message;;
-
-    try:
-        # Wait for the notification message to appear
-        wait = WebDriverWait(driver, 10)
-        notification_element = wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "dmx-notify-message"))
-        )
-
-        # Get and print the message text
-        notification_message = notification_element.text
-        print(f"Notification Message: {notification_message}")
-
-    except Exception as e:
-        print(f"Error: Unable to retrieve the notification message. {e}")
+              #--------#--- CV----//--- button process----------click to ho raha but error aa rahi hai
 
 
-
-
-        #---psyco_report;
-    try:
-        # Wait for the clickable element
-        wait = WebDriverWait(driver, 10)
-        element_to_click = wait.until(EC.element_to_be_clickable(
-            (By.XPATH, "//a[contains(@class, 'dropdown-item') and contains(@dmx-bind:href, 'psyco_report_path')]")
-        ))
-
-        # Click the element
-        time.sleep(2)
-        element_to_click.click()
-        print("Element clicked successfully!")
-
-    except Exception as e:
-        print(f"Error: Unable to click the element. {e}")
-
-
-                                                 #---psyco notification_message--
-    try:
-        # Wait for the notification element to appear
-        wait = WebDriverWait(driver, 10)
-        notify_element = wait.until(
-            EC.presence_of_element_located((By.CLASS_NAME, "dmx-notify-message"))
-        )
-
-        # Extract the text from the notification element
-        notify_message = notify_element.text
-
-        # Check if the message is related to the "Psychometric report"
-        if "Psychometric report" in notify_message:
-            print(f"Psychometric Notify Message: {notify_message}")
-        else:
-            print("Notification message is not related to the Psychometric report.")
-
-    except Exception as e:
-        print(f"Error: Unable to retrieve the notification message. {e}")
-
-
-# #----------cv is not working------but-----
-
-
-    # # Locate the button by XPath and click ------2nd few --------success psychometrics
-
-    # button = driver.find_element(By.XPATH, "//button[contains(.,'Psychometric')]")
-    
-    # button.click()
-    # wait = WebDriverWait(driver, 10)    
     # try:
-    #     # Locate the notification message when it appears
-    #     time.sleep(30)
-    #     error_message_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.dmx-notify-message")))
-        
-    #     # Get and print the text of the message
-    #     error_message = error_message_element.text
-    #     print(f"Error Message: {error_message}")
-        
+    #     # Find the <a> element using its XPath
+    #     dropdown_item = WebDriverWait(driver, 10).until(
+    #         EC.presence_of_element_located((By.XPATH, "//a[@class='dropdown-item btn']"))
+    #     )
+
+    #     # Perform a click action
+    #     dropdown_item.click()
+
+    #     # Print a message to confirm the click
+    #     print("Clicked the link of cv")
+
+    #     # Wait for the notification message to appear
+    #     notification_element = WebDriverWait(driver, 10).until(
+    #         EC.presence_of_element_located((By.CLASS_NAME, "dmx-notify-message"))
+    #     )
+
+    #     # Get and print the message text
+    #     notification_message = notification_element.text
+    #     print(f"Notification Message: {notification_message}")
+
     # except Exception as e:
-    #     print(f"Error locating the message: {e}")
+    #     print(f"Error: {e}")
+
+
+
+
+    #                             #--#---------psyco_report----------------;
+
+
+    # try:
+    #     # Find the <a> element using XPath
+    #     dropdown_item = WebDriverWait(driver, 10).until(
+    #         EC.presence_of_element_located((By.XPATH, "//a[@class='dropdown-item btn']"))
+    #     )
+
+    #     # Perform a click action
+    #     dropdown_item.click()
+    #     print("Clicked the link of physco")
+
+    #     # Wait for the notification message to appear after clicking
+    #     notify_element = WebDriverWait(driver, 10).until(
+    #         EC.presence_of_element_located((By.CLASS_NAME, "dmx-notify-message"))
+    #     )
+
+    #     # Extract the text from the notification element
+    #     notify_message = notify_element.text
+
+    #     # Check if the message is related to the "Psychometric report"
+    #     if "Psychometric report" in notify_message:
+    #         print(f"Psychometric Notify Message: {notify_message}")
+    #     else:
+    #         print("Notification message is not related to the Psychometric report.")
+
+    # except Exception as e:
+    #     print(f"Error: {e}")
+
+
+                         ##-----------------------download process--------------------
+
+
+    # # Locate the path element inside the SVG and click it
+    # svg_element = driver.find_element(By.XPATH, "//svg//path[@fill='#646464']")
+    # time.sleep(2)
+    # svg_element.click()
+
+    # # Print confirmation message
+    # print("SVG element clicked successfully.")
+
+
+    #     ##-----------'Download With Comment'-----
+
+    # # Locate the button by its text and click it
+    # button = driver.find_element(By.XPATH, "//button[text()='Download With Comment']")
+    # time.sleep(2)
+    # button.click()
+
+    # # Print confirmation message
+    # print("Button clicked successfully.")
+
+    #             ##-----------'Download Without Comment'----
+
+    #     # Locate the button by its text and click it
+    # button = driver.find_element(By.XPATH, "//button[text()='Download Without Comment']")
+    # time.sleep(5)
+    # button.click()
+
+    # # Print confirmation message
+    # print("Button clicked successfully.")
+
+
+
+
+
+
+                    #---#--////------Technical_part-----End----------/////------
 
 
 
@@ -586,83 +633,30 @@ try:
 
 
 
+#----
 
-                                        #-----#---click ---download section--------------
-
-
-
-    try:
-        # Wait for the button with the download icon to be clickable
-        wait = WebDriverWait(driver, 10)
-        download_button = wait.until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@type='button' and contains(@class, 'btn show')]"))
-        )
-        
-        # Click the download button
-        time.sleep(2)
-        download_button.click()
-        print("Download icon clicked successfully.")
-
-        # If needed, click one of the dropdown items (e.g.,---- Download With Comment)
-
-
-        download_with_comment = wait.until(
-            EC.element_to_be_clickable((By.ID, "btnWithCmmt"))
-        )
-        time.sleep(5)
-        download_with_comment.click()
-        print("Download With Comment clicked successfully.")
-
-    except Exception as e:
-        print(f"Error clicking the download icon or dropdown: {e}")
-
-
-            # drop down item----download without comment
-    try:
-        # Wait for the "Download Without Comment" button to be clickable
-        wait = WebDriverWait(driver, 10)
-        download_without_comment_button = wait.until(
-            EC.element_to_be_clickable((By.ID, "btnWithoutCmmt"))
-        )
-        
-        # Click the button
-        time.sleep(5)
-        download_without_comment_button.click()
-        print("Download Without Comment clicked successfully.")
-
-    except Exception as e:
-        print(f"Error clicking the 'Download Without Comment' button: {e}")
+                                                #-----#---click ---download section--------------
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-    #----------------------------leadership start--------------
+#     #----------------------------Leadership_part--------------start---------
 
     
-# #---------------------------
+# # #---------------------------
 
-# ##click leadership
+            #    ----- # ##-----------click leadership
 
  # Increase wait time to handle slower loading elements
-    time.sleep(5)
+    
     leadership_link = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'a[href="/rac_assessment/leadership"]')))
     
     # Scroll the element into view
     driver.execute_script("arguments[0].scrollIntoView(true);", leadership_link)
     
     # Click the link
-    time.sleep(5)
+    
     leadership_link.click()
 
     # Print a success message
@@ -672,18 +666,25 @@ try:
     # Click the button -------------------filter appy---------upcoming
 
 
-    button = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.ID, 'collapseFilter'))  # Using ID directly
-    )
-    time.sleep(2)
+    # Wait until the button is clickable
+    wait = WebDriverWait(driver, 10)
+    print('Till Heere******************')
+    time.sleep(50)
+    button = wait.until(EC.element_to_be_clickable((By.ID, 'collapseFilter')))
+    print(button)
+    # Click the button
     button.click()
 
-        # Wait for the dropdown to be clickable and click it to expand
-    dropdown = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.ID, 'asserNameFilter_ID'))
+    # Optionally, print confirmation
+    print("Clicked the filter button")
+
+
+    dropdown = WebDriverWait(driver, 20).until(
+        EC.visibility_of_element_located((By.XPATH, "//select[@id='asserNameFilter_ID']"))
     )
     time.sleep(2)
     dropdown.click()
+    print(dropdown.text)
 
     # Wait for the "Ashutosh" option to be clickable and click it
     option = WebDriverWait(driver, 10).until(
@@ -691,9 +692,21 @@ try:
     )
     time.sleep(3)
     option.click()
-    print("Ashutosh")
+    print(option.text)
+
+        #-------------- ---------------------------new code
 
 
+#-----------------------------------
+    # Click the filter button
+
+    # Switch to the iframe if the dropdown is inside it
+   
+
+    #----------------------
+
+    # Confirmation print statement
+    print("Clicked the dropdown option Ashutosh")
 
         # Wait for the dropdown to be clickable and click it to expand
     dropdown = WebDriverWait(driver, 10).until(
@@ -701,14 +714,14 @@ try:
     )
     time.sleep(3)
     dropdown.click()  # Click the dropdown to show options
-
+    print(dropdown.text)
     # Wait for the "Data Scientist II" option to be clickable and click it
     option = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.XPATH, "//option[text()='Data Scientist II']"))
     )
     time.sleep(3)
     option.click()  # Click the "Data Scientist II" option
-    print("Data Scientist II")
+    print(option)
 
     # Wait for the button to be clickable and click it
     apply_filter_button = WebDriverWait(driver, 10).until(
@@ -716,7 +729,7 @@ try:
     )
     time.sleep(3)
     apply_filter_button.click()  # Click the "Apply Filters" button
-
+    print(apply_filter_button.text)
 
 #---------------------------------------------#
   
@@ -726,7 +739,8 @@ try:
     username = data["user_data"]["username"]
     username_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#username")))
     username_field.send_keys(username)  # Use the username from the data
-    time.sleep(4)
+    time.sleep(2)
+    print(username)
     # Optional: keep the window open for a few seconds to view results-------------------
  # Wait for the button with class 'btn' and 'p-1' to be clickable
     button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button.btn.p-1")))
@@ -750,47 +764,56 @@ try:
     # Click the anchor element
     time.sleep(4)
     close_button.click()
+    print(close_button.text)
 
-#--------------------create arrray--------------#
-# Import necessary modules
 
-    # Set up WebDriverWait
-    wait = WebDriverWait(driver, 10)
-        # Iterate through each section in 'my_list'
+
+
+
+
+
+
+
+
+
+    # Iterate through each section in 'my_list'
     for i, section_data in enumerate(data["user_data"]["my_list"]):
         try:
             print(f"Processing section {i + 1}")
 
             # Fill in the fields for the current section
             for key, value in section_data.items():
-                # Locate the textarea using its NAME attribute
-                textarea = wait.until(EC.presence_of_element_located((By.NAME, key)))
+                try:
+                    # Locate the textarea using its NAME attribute
+                    textarea = wait.until(EC.presence_of_element_located((By.NAME, key)))
 
-                # Scroll the textarea into view if necessary
-                driver.execute_script("arguments[0].scrollIntoView(true);", textarea)
+                    # Scroll the textarea into view if necessary
+                    driver.execute_script("arguments[0].scrollIntoView(true);", textarea)
 
-                # Clear the field and input the value
-                textarea.clear()
-                time.sleep(2)  # Optional wait before sending keys
-                textarea.send_keys(value)
+                    # Clear the field and input the value
+                    textarea.clear()
+                    time.sleep(2)  # Optional wait before sending keys
+                    textarea.send_keys(value)
+                except Exception as e:
+                    print(f"Error while filling '{key}' in section {i + 1}: {e}")
 
             # Handle radio button and Save & Next button, except for the last section
-            if i < len(data["user_data"]["my_list"]) - 1:  # Check if not the last section
+            if i < len(data["user_data"]["my_list"]) - 1:  # Check if it's not the last section
                 try:
                     # Locate and click the radio button (adjust ID if needed)
                     radio_button = wait.until(EC.element_to_be_clickable((By.ID, "score3")))  # Change ID as necessary
                     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", radio_button)
-                    time.sleep(2)  # Wait for the radio button to be in view
+                    time.sleep(2)  # Optional wait
                     radio_button.click()
 
                     # Locate and click the Save & Next button
                     save_next_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Save & Next')]")))
                     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", save_next_button)
-                    time.sleep(2)  # Wait for the button to be in view
+                    time.sleep(2)  # Optional wait
                     save_next_button.click()
 
                     # Wait for the next section to load
-                    time.sleep(4)
+                    time.sleep(3)
                 except Exception as e:
                     print(f"Error during radio button or save action for section {i + 1}: {e}")
             else:
@@ -799,29 +822,60 @@ try:
         except Exception as e:
             print(f"Error processing section {i + 1}: {e}")
 
+#--------------------create arrray--------------#
+
+
+
+
+
 # #------------------click leadership---
+   
+
+
+    try:
+        # Wait until the 'Leadership' link is clickable
+        leadership_link = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//a[contains(@href, '/rac_assessment/leadership')]"))
+        )
+
+        # Print message before clicking
+        print("Clicking the Leadership link...")
+
+        # Click on the 'Leadership' link
+        time.sleep(3)
+        leadership_link.click()
+
+        # Print message after clicking
+        print("Leadership link clicked!")
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+#     # #----------------
+
+        #   ------#click---- complete ------leadership
+    try:
+        # Locate the 'Completed' button using its class and text
+        completed_button = wait.until(
+            EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'nav-link') and text()='Completed']"))
+        )
+
+        # Scroll the element into view if necessary
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", completed_button)
+
+        # Print the text of the button
+        button_text = completed_button.text
+        print(f"Button Text: {button_text}")
+
+        # Optional wait before clicking
+        time.sleep(3)
+
+        # Click the button
+        completed_button.click()
+        print("Completed button clicked successfully!")
+
+    except Exception as e:
+        print(f"Error clicking the 'Completed' button: {e}")
     
-    time.sleep(5)
-    leadership_link = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'a[href="/rac_assessment/leadership"]')))
-        
-        # Scroll the element into view
-    driver.execute_script("arguments[0].scrollIntoView(true);", leadership_link)
-        
-        # Click the link
-    time.sleep(5)
-    leadership_link.click()
-    # #----------------
-
-
-    #click complete ------leadership
-
-    completed_button = driver.find_element(By.XPATH, "//div[@id='complete']//a[contains(text(),'Completed')]")
-
-    # Click the "Completed" link
-    time.sleep(3)
-    completed_button.click()
-
-
 
     # ---Click the button------apply filter
 
@@ -832,19 +886,21 @@ try:
     time.sleep(2)
     button.click()
 
-        # Wait for the dropdown to be clickable and click it to expand
-    dropdown = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.ID, 'asserNameFilter_ID'))
-    )
-    time.sleep(2)
-    dropdown.click()
 
-    # Wait for the "Ashutosh" option to be clickable and click it
-    option = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, "//option[text()='Ashutosh']"))
-    )
-    time.sleep(3)
-    option.click()
+    # Wait for the dropdown to be clickable
+    wait = WebDriverWait(driver, 10)
+    dropdown_element = wait.until(EC.element_to_be_clickable((By.ID, 'asserNameFilter_ID')))
+
+    # Create a Select object and select the option by visible text
+    select = Select(dropdown_element)
+
+    # Select the "Ashutosh" option from the dropdown
+    select.select_by_visible_text("Ashutosh")
+
+    # Optionally, print confirmation
+    print("Selected the option Ashutosh")
+
+
 
 
 
@@ -869,11 +925,22 @@ try:
     time.sleep(3)
     apply_filter_button.click()  # Click the "Apply Filters" button
 
-#-----username-------
-    time.sleep(2)
-    username_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#username")))
-    username_field.send_keys("Tara")
-    time.sleep(4)
+
+# #-----username-------
+    try:
+        username_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#username")))
+        username_value = data["complete_my_list_eye"]["#username"]
+
+        # Scroll to the field if necessary
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", username_field)
+
+        # Clear the field and send the value
+        username_field.clear()
+        username_field.send_keys(username_value)
+        print(f"Sent value '{username_value}' to the username field.")
+    except Exception as e:
+        print(f"Error sending value to the username field: {e}")
+
 
 
 
@@ -885,59 +952,59 @@ try:
     time.sleep(3)
     button.click()
 
-#         #--------------json---start 
-#     try:
-#         # Locate the textarea using its ID and wait until it's clickable
-#         textarea = wait.until(EC.element_to_be_clickable((By.ID, "overallFeedback")))
+        #--------------json---start 
+    try:
+        # Locate the textarea using its ID and wait until it's clickable
+        textarea = wait.until(EC.element_to_be_clickable((By.ID, "overallFeedback")))
 
-#         # Scroll the textarea into view
-#         driver.execute_script("arguments[0].scrollIntoView(true);", textarea)
+        # Scroll the textarea into view
+        driver.execute_script("arguments[0].scrollIntoView(true);", textarea)
 
-#         # Clear any existing text in the textarea (optional)
-#         textarea.clear()
+        # Clear any existing text in the textarea (optional)
+        textarea.clear()
 
-#         # Optional wait to ensure the field is ready for input
-#         time.sleep(1)  # Adjust time as necessary
+        # Optional wait to ensure the field is ready for input
+        time.sleep(1)  # Adjust time as necessary
 
-#         # Fill the textarea with the value from the data structure
-#         textarea.send_keys(data["fields"]["overallFeedback"])  # Use the value associated with the key
+        # Fill the textarea with the value from the data structure
+        textarea.send_keys(data["fields"]["overallFeedback"])  # Use the value associated with the key
 
-#     except Exception as e:
-#         print(f"Error filling overall feedback: {e}")
+    except Exception as e:
+        print(f"Error filling overall feedback: {e}")
 
 
 #         #-------------fill eye form-----------#
         
 
 
-#     # Loop through the list of dictionaries (eye) and process each section
-#     for index, section_data in enumerate(data["eye"]):
-#         try:
-#             print(f"Processing eye section {index + 1}...")
+    # Loop through the list of dictionaries (eye) and process each section
+    for index, section_data in enumerate(data["eye"]):
+        try:
+            print(f"Processing eye section {index + 1}...")
 
-#             # Loop through each key-value pair in the current section's dictionary
-#             for key, value in section_data.items():
-#                 try:
-#                     # Adjust the XPath to locate the textarea by the correct identifier
-#                     textarea_xpath = f"//textarea[@id='{key}']"  # Use 'name' or 'id' as appropriate
+            # Loop through each key-value pair in the current section's dictionary
+            for key, value in section_data.items():
+                try:
+                    # Adjust the XPath to locate the textarea by the correct identifier
+                    textarea_xpath = f"//textarea[@id='{key}']"  # Use 'name' or 'id' as appropriate
 
-#                     # Wait until the textarea is present and interactable
-#                     textarea = wait.until(EC.presence_of_element_located((By.XPATH, textarea_xpath)))
+                    # Wait until the textarea is present and interactable
+                    textarea = wait.until(EC.presence_of_element_located((By.XPATH, textarea_xpath)))
 
-#                     # Scroll the textarea into view if necessary
-#                     driver.execute_script("arguments[0].scrollIntoView(true);", textarea)
+                    # Scroll the textarea into view if necessary
+                    driver.execute_script("arguments[0].scrollIntoView(true);", textarea)
 
-#                     # Clear the field and input the value
-#                     textarea.clear()  # Clear the field
-#                     time.sleep(1)  # Optional wait before sending keys
-#                     textarea.send_keys(value)  # Input the value
-#                     time.sleep(1)  # Optional wait after sending keys
+                    # Clear the field and input the value
+                    textarea.clear()  # Clear the field
+                    time.sleep(2)  # Optional wait before sending keys
+                    textarea.send_keys(value)  # Input the value
+                    time.sleep(1)  # Optional wait after sending keys
 
-#                 except Exception as e:
-#                     print(f"Error processing key '{key}' in eye section {index + 1}: {e}")
+                except Exception as e:
+                    print(f"Error processing key '{key}' in eye section {index + 1}: {e}")
 
-#         except Exception as e:
-#             print(f"Error processing eye section {index + 1}: {e}")
+        except Exception as e:
+            print(f"Error processing eye section {index + 1}: {e}")
 
 
 
@@ -949,365 +1016,199 @@ try:
 #  # ----------------=--------Locate the <textarea> using XPath
 
 
-#     # Locate the first <textarea> and fill it with the 'areaforDev' value
-#     textarea_areaforDev = driver.find_element(By.XPATH, "//textarea[@id='areaforDev']")
-#     textarea_areaforDev.clear()  # Clear the textarea
-#     time.sleep(3)
-#     textarea_areaforDev.send_keys(data["textarea"]["areaforDev"])  # Fill with value from JSON
+    # Locate the first <textarea> and fill it with the 'areaforDev' value
+    textarea_areaforDev = driver.find_element(By.XPATH, "//textarea[@id='areaforDev']")
+    textarea_areaforDev.clear()  # Clear the textarea
+    time.sleep(3)
+    textarea_areaforDev.send_keys(data["textarea"]["areaforDev"])  # Fill with value from JSON
 
  
 
-#     # Locate the second <textarea> and fill it with the 'recLearnInitiative' value
-#     textarea_recLearnInitiative = driver.find_element(By.XPATH, "//textarea[@id='recLearnInitiative']")
-#     textarea_recLearnInitiative.clear()  # Clear the textarea
-#     time.sleep(3)
-#     textarea_recLearnInitiative.send_keys(data["textarea"]["recLearnInitiative"])  # Fill with value from JSON
+    # Locate the second <textarea> and fill it with the 'recLearnInitiative' value
+    textarea_recLearnInitiative = driver.find_element(By.XPATH, "//textarea[@id='recLearnInitiative']")
+    textarea_recLearnInitiative.clear()  # Clear the textarea
+    time.sleep(3)
+    textarea_recLearnInitiative.send_keys(data["textarea"]["recLearnInitiative"])  # Fill with value from JSON
 
 
 # # #                              # --------------------------------leadership completed code with submit code
    
 
-#  # Locate the button using XPath
-#     submit_button = driver.find_element(By.XPATH, "//button[@id='submitResponse']")
+ # Locate the button using XPath
+    submit_button = driver.find_element(By.XPATH, "//button[@id='submitResponse']")
 
-#     # Click the submit button
-#     time.sleep(3)
-#     submit_button.click()
+    # Click the submit button
+    time.sleep(3)
+    submit_button.click()
 
 
-#     # Wait for the div with class 'dmx-notify-message' to appear and capture the text------print success message
-#     try:
-#         # Wait until the div with the class 'dmx-notify-message' becomes visible
-#         response_element = WebDriverWait(driver, 10).until(
-#             EC.visibility_of_element_located((By.XPATH, "//div[@class='dmx-notify-message']"))
-#         )
+    # Wait for the div with class 'dmx-notify-message' to appear and capture the text------print success message
+    try:
+        # Wait until the div with the class 'dmx-notify-message' becomes visible
+        response_element = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, "//div[@class='dmx-notify-message']"))
+        )
         
-#         # Print the message inside the div
-#         print("Message:", response_element.text)
+        # Print the message inside the div
+        print("Message:", response_element.text)
 
-#     except Exception as e:
-#         print(f"Error occurred: {e}")
-
-
-#                                                                         ##---leadership complet label close successfully----;;;
-
-#    # Locate the button using XPath close button completed
-#     time.sleep(10)
-#     button = driver.find_element(By.XPATH, "//button[@type='button' and @class='btn-close text-reset' and @aria-label='Close']")
-#     # Click the button
-#     time.sleep(3)
-#     button.click()
-
-# ##------------------------------------END------------------#
+    except Exception as e:
+        print(f"Error occurred: {e}")
 
 
- 
+#                                           ##---leadership complet label close successfully----;;;
+
+   # Locate the button using XPath close button completed
+    time.sleep(10)
+    button = driver.find_element(By.XPATH, "//button[@type='button' and @class='btn-close text-reset' and @aria-label='Close']")
+    # Click the button
+    time.sleep(3)
+    button.click()
+
+
+    ##-----------cv-is not working------ and ----pyscho----click
+
+    # # Find the <a> element using XPath
+    # dropdown_item = driver.find_element(By.XPATH, "//a[@class='dropdown-item btn']")
+
+    # # Perform a click action
+    # time.sleep(3)
+    # dropdown_item.click()
+
+    # # Print a message to confirm the click
+    # print("click physco")
+    # # Locate the div element by class name
+    # message_element = driver.find_element(By.CLASS_NAME, "dmx-notify-message")
+
+    # # Extract and print the message text
+    # print("Message:", message_element.text)
 
 
 
 
-# # #                              # --------------------------------leadership completed code with submit code
+#     #----------------------------Leadership_part--------------End----
+
+# # ##------------------------------------END------------------#
+
+
+# # -/-//// # --------------------------------leadership completed code with submit code
    
 
 
-# #----------------#
+# # #----------------#
 
-#                                                                     #------------mindset click success-----------#
+# #                                   #------------Mindset_start-----------#
 
+# #                                   #------------mindset click success-----------#
 
                                 
-#     try:
-#         # Wait until the link is clickable and then click it
-#         link = WebDriverWait(driver, 10).until(
-#             EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'nav-link') and contains(., 'Mindset')]"))
-#         )
+    try:
+        # Wait until the link is clickable and then click it
+        link = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'nav-link') and contains(., 'Mindset')]"))
+        )
         
-#         # Click the link
-#         link.click()
-#         print("Link clicked successfully.")
+        # Click the link
+        link.click()
+        print("Link clicked successfully.")
 
-#     except Exception as e:
-#         print(f"Error occurred: {e}")   
+    except Exception as e:
+        print(f"Error occurred: {e}")   
 
 
 
         
-#  # Find the username field and enter email
-#     time.sleep(2)
-#     username_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#username")))
-#     username_field.send_keys("Radhika")
-#     time.sleep(4)    
+ # Find the username field and enter email
+    time.sleep(2)
+        
+    # Locate the username field
+    try:
+        username_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#username")))
+        
+        # Scroll the field into view if necessary
+        driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", username_field)
+        
+        # Clear the field (if needed) and send the value
+        username_field.clear()  # Optional: Clear the field before sending keys
+        username_field.send_keys(data["mindset_user"]["#username"])
+        print("Value sent successfully:", data["mindset_user"]["#username"])
+    except Exception as e:
+        print("Error sending value to username field:", e)  
 
 # #---------------mindset DOWNLOAD PROCESS SUCCESSFULLY----------------#
 
 
 
-#     try:
-#         # Wait until the dropdown button is clickable and click it
-#         dropdown_button = WebDriverWait(driver, 10).until(
-#             EC.element_to_be_clickable((By.XPATH, "//button[@class='btn my-0 py-0' and @data-bs-toggle='dropdown']"))
-#         )
-#         time.sleep(3)
-#         dropdown_button.click()
-#         print("Dropdown button clicked successfully.")
+    try:
+        # Wait until the dropdown button is clickable and click it
+        dropdown_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[@class='btn my-0 py-0' and @data-bs-toggle='dropdown']"))
+        )
+        time.sleep(3)
+        dropdown_button.click()
+        print("Dropdown button clicked successfully.")
 
-#         # Wait until the dropdown item "Download in English" is visible and click it
-#         download_link = WebDriverWait(driver, 10).until(
-#             EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'Download in English')]"))
-#         )
-#         time.sleep(3)
-#         download_link.click()
-#         print("Download link clicked successfully.")
+        # Wait until the dropdown item "Download in English" is visible and click it
+        download_link = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'Download in English')]"))
+        )
+        time.sleep(3)
+        download_link.click()
+        print("Download link clicked successfully.")
 
-#     except Exception as e:
-#         print(f"Error occurred: {e}")
+    except Exception as e:
+        print(f"Error occurred: {e}")
 
-#     try:
-#         # Wait until the dropdown button is clickable and click it
-#         dropdown_button = WebDriverWait(driver, 10).until(
-#             EC.element_to_be_clickable((By.XPATH, "//button[@class='btn my-0 py-0' and @data-bs-toggle='dropdown']"))
-#         )
-#         time.sleep(3)
-#         dropdown_button.click()
-#         print("Dropdown button clicked successfully.")
+    try:
+        # Wait until the dropdown button is clickable and click it
+        dropdown_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[@class='btn my-0 py-0' and @data-bs-toggle='dropdown']"))
+        )
+        time.sleep(3)
+        dropdown_button.click()
+        print("Dropdown button clicked successfully.")
 
-#         # Wait until the dropdown item "تحميل باللغة العربية" is visible and click it
-#         download_link_arabic = WebDriverWait(driver, 10).until(
-#             EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'تحميل باللغة العربية')]"))
-#         )
-#         time.sleep(3)
-#         download_link_arabic.click()
-#         print("Download link in Arabic clicked successfully.")
+        # Wait until the dropdown item "تحميل باللغة العربية" is visible and click it
+        download_link_arabic = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'تحميل باللغة العربية')]"))
+        )
+        time.sleep(3)
+        download_link_arabic.click()
+        print("Download link in Arabic clicked successfully.")
 
-#     except Exception as e:
-#         print(f"Error occurred: {e}")
-
-
-#------------------end--------
+    except Exception as e:
+        print(f"Error occurred: {e}")
 
 
+# #-------------------Mindset_End--------
 
 
 
-#             #-----------------REPORT DOWNLOAD PROCESS
-#              ---------------    ----------------------------  #Click Report Link  # And COMPLETED CLICK and Download Process
 
 
-        
-    # try:
-    #     # Wait for the link to be clickable
-    #     link = WebDriverWait(driver, 10).until(
-    #         EC.element_to_be_clickable((By.XPATH, "//a[contains(@href, '/report/reports')]"))
-    #     )
-
-    #     # Optional: Scroll the link into view
-    #     driver.execute_script("arguments[0].scrollIntoView(true);", link)
-
-    #     # Click the link
-    #     time.sleep(5)
-    #     link.click()
-
-    # except Exception as e:
-    #     print(f"Error clicking the link: {e}")
-
-
-
-    # try:
-    #     # Wait for the link to be clickable
-    #     link = WebDriverWait(driver, 10).until(
-    #         EC.element_to_be_clickable((By.XPATH, "//a[contains(text(), 'Partial')]"))
-    #     )
-
-    #     # Optional: Scroll the link into view
-    #     driver.execute_script("arguments[0].scrollIntoView(true);", link)
-
-    #     # Click the link
-    #     link.click()
-
-    # except Exception as e:
-    #     print(f"Error clicking the link: {e}")
-    # #---------------click filter
-        
-    # try:
-    #     # Wait for the button to be clickable
-    #     button = WebDriverWait(driver, 10).until(
-    #         EC.element_to_be_clickable((By.ID, "collapseFilter"))
-    #     )
-
-    #     # Optional: Scroll the button into view
-    #     driver.execute_script("arguments[0].scrollIntoView(true);", button)
-
-    #     # Click the button
-    #     button.click()
-
-    # except Exception as e:
-    #     print(f"Error clicking the button: {e}")
+# #             #-----------------REPORT click link
 
 
         
-    # try:
-    #     # Wait for the dropdown to be present
-    #     dropdown = WebDriverWait(driver, 10).until(
-    #         EC.presence_of_element_located((By.ID, "nomPosIdFilter_ID"))
-    #     )
-
-    #     # Click the dropdown to open it
-    #     dropdown.click()
-
-    #     # Create a Select object
-    #     select = Select(dropdown)
-
-    #     # Select the option "Data Scientist II"
-    #     select.select_by_visible_text("Data Scientist II")
-
-    # except Exception as e:
-    #     print(f"Error selecting option: {e}")
-            
-    #     try:
-    #         # Wait for the button to be clickable
-    #         apply_button = WebDriverWait(driver, 10).until(
-    #             EC.element_to_be_clickable((By.ID, "applyFilterId"))
-    #         )
-
-    #         # Click the "Apply Filters" button
-    #         apply_button.click()
-
-    #     except Exception as e:
-    #         print(f"Error clicking the Apply Filters button: {e}")
-
-
-    #     # Find the username field and enter email
-    #     time.sleep(3)
-    #     username_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#username")))
-    #     username_field.send_keys("Shweta")
-    #     time.sleep(3)
-
-    #     #----click eye success
-
-    #     wait = WebDriverWait(driver, 10)
-    #     button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='btn' and @type='button']")))
-    #     # Click the button
-    #     time.sleep(3)
-    #     button.click()
-
+    # Wait for the link to be clickable
+    try:
+        # Locate the link element
+        link_element = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/report/rac-report']")))
         
-    #     # Wait for the button to be clickable and then click it--- --download with comment----first-----
-    #     wait = WebDriverWait(driver, 10)
-    #     button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'daa_button') and @type='button']")))
+        # Click the link
+        time.sleep(5)
+        link_element.click()
+        print(" report Link clicked successfully.")
 
-    #     # Click the button
-    #     time.sleep(3)
-    #     button.click()
-    #     time.sleep(10)
+        # Locate the <p> tag inside the <a> tag
+        p_element = wait.until(EC.presence_of_element_located((By.XPATH, "//a[@href='/report/rac-report']//p[@class='text007']")))
 
+        # Get the text of the <p> tag
+        p_text = p_element.text
+        print("Text inside the <p> tag:", p_text)
 
-
-    #     # Wait for the button to be clickable and then click it--- --download without comment----second----
-    #     wait = WebDriverWait(driver, 10)
-    #     button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'daa_button') and contains(., 'Download without Comment')]")))
-            
-    #         # Perform the click
-    #     time.sleep(3)
-    #     button.click()
-
-
-
-
-
-
-
-    #     #--------------report click and complete-----click-------
-
-
-    #     # Wait for the "Report" link to be clickable
-    #     wait = WebDriverWait(driver, 10)
-    #     report_link = wait.until(EC.element_to_be_clickable((By.XPATH, "//a[@href='/report/reports']")))
-    # #    Scroll the element into view
-    #     driver.execute_script("arguments[0].scrollIntoView(true);", report_link)
-        
-    #     # Click the "Report" link
-    #     time.sleep(3)
-    #     report_link.click()
-
-
-    # #-----------click filter completed
-
-    # #---------------click filter
-    #     filter_button = WebDriverWait(driver, 10).until(
-    #         EC.element_to_be_clickable((By.ID, "collapseFilter"))
-    #     )
-    #     filter_button.click()
-
-
-
-    #     try:
-    #         # Wait until the dropdown is present
-    #         dropdown = WebDriverWait(driver, 10).until(
-    #             EC.presence_of_element_located((By.ID, "nomPosIdFilter_ID"))  # Replace with your actual dropdown ID
-    #         )
-            
-    #         # Create a Select object for the dropdown
-    #         time.sleep(3)
-    #         select = Select(dropdown)
-            
-    
-    #         # Select the option "Data Scientist II"
-    #         time.sleep(3)
-    #         select.select_by_visible_text("Data Scientist II")
-    #         print("Option 'Data Scientist II' selected successfully.")
-
-    #     except Exception as e:
-    #         print(f"Error occurred: {e}")
-
-    #     try:
-    #         # Wait until the button is clickable
-    #         apply_filters_button = WebDriverWait(driver, 10).until(
-    #             EC.element_to_be_clickable((By.ID, "applyFilterId"))  # Replace with the button's ID
-    #         )
-            
-    #         # Click the "Apply Filters" button
-    #         time.sleep(3)
-    #         apply_filters_button.click()
-    #         print("Clicked 'Apply Filters' button successfully.")
-
-    #     except Exception as e:
-    #         print(f"Error occurred: {e}")
-
-
-
-    # #-----
-
-    #     # Find the username field and enter email
-    #     time.sleep(3)
-    #     username_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#username")))
-    #     username_field.send_keys("Tara")
-    #     time.sleep(3)
-
-    #     wait = WebDriverWait(driver, 10)
-    #     button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='btn' and @type='button']")))
-    #     # Click the button
-    #     time.sleep(3)
-    #     button.click()
-
-
-    #     # Wait for the button to be clickable and then click it --------DOWNLOAD FIRST
-    #     wait = WebDriverWait(driver, 10)
-    #     button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'daa_button') and @type='button']")))
-
-    #     # Click the button
-    #     time.sleep(3)
-    #     button.click()
-    #     time.sleep(10)
-
-
-    #     wait = WebDriverWait(driver, 10)
-    #     button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'daa_button') and contains(., 'Download without Comment')]")))
-            
-    #         # Perform the click
-    #     time.sleep(3)
-    #     button.click()
-
-
+    except Exception as e:
+        print("Error:", e)
 
 
 
