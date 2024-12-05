@@ -1392,7 +1392,9 @@ try:
 
 
     back_button = driver.find_element(By.XPATH, '//*[@id="backButtonId "]')
+    time.sleep(5)
     back_button.click()
+    
 
 
 
