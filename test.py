@@ -422,6 +422,16 @@ try:
 
 
 
+#----department
+
+    link_report = WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((By.XPATH, "//a[contains(@href, '/report/rac-report') and .//p[text()='Report']]"))
+    )
+
+    # Click the element
+    time.sleep(2)
+    link_report.click()
+
 
 
 
