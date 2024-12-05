@@ -226,8 +226,82 @@ try:
     link_report.click()
     time.sleep(3)
 
+    partial_assement = driver.find_element(By.ID, 'partialCompleteId')
+    partial_assement.click()
 
 
+
+    filter = driver.find_element(By.ID,"collapseFilter")
+    filter.click()
+    time.sleep(3)
+
+
+   
+    time.sleep(3)
+        
+    dropdown_element = driver.find_element(By.ID, "nomPosIdFilter_ID")
+
+    # Create a Select object for the dropdown
+    select = Select(dropdown_element)
+
+    # Select the option by visible text
+    select.select_by_visible_text("Data Scientist II")
+
+
+
+
+    time.sleep(3)
+
+    click_applyfilter = driver.find_element(By.ID,"applyFilterId")
+    click_applyfilter.click()
+    time.sleep(3)
+            
+    
+    username = data["report_partial"]["username"]
+    input_field = driver.find_element(By.ID, "username")
+    input_field.click()
+    input_field.send_keys(username)
+    print(username)
+    time.sleep(3)
+
+
+
+
+
+    try:
+        # Wait until the button with id 'eyeReportId' is clickable
+        button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "eyeReportId"))
+        )
+
+        # Click the button
+        button.click()
+
+    except Exception as e:
+        print(f"Error occurred: {e}")
+
+        
+    # button = driver.find_element(By.XPATH, "//button[@id='eyeReportId']")
+    # button.click()
+
+    
+    print("clicked eye_report")
+  
+
+    download_with_comment = driver.find_element(By.ID, 'downloadWithCmmtBtn')
+    download_with_comment.click()
+
+
+    time.sleep(15)
+    
+    download_without_comment = driver.find_element(By.ID,"downloadWithOutCmmtBtn")
+    download_without_comment.click()
+    time.sleep(15)
+
+    back_button = driver.find_element(By.ID,"backButtonId")
+    back_button.click()
+
+    
 
 
 
