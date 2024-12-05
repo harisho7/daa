@@ -1198,14 +1198,33 @@ try:
 
         
         
-     
-    link_report = driver.find_element(By.XPATH, "//a[contains(@href, '/report/reports') and //p[text()='Report']]")
-    link_report.click()
-    time.sleep(3)
+        
+    try:
+        # Wait for the "Report" link to be clickable
+        report_link = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//a[./p[text()='Report']]"))
+        )
+        
+        # Click the element
+        report_link.click()
 
-    link_Partial = driver.find_element(By.XPATH, "//a[text()='Partial']")
-    link_Partial.click()
-    time.sleep(3)
+    except Exception as e:
+        print(f"Error: {e}")
+
+
+    
+    try:
+        # Wait for the element with the id 'partialCompleteId' to be clickable
+        partial_complete_element = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, 'partialCompleteId'))
+        )
+        
+        # Click the element
+        time.sleep(2)
+        partial_complete_element.click()
+
+    except Exception as e:
+        print(f"Error: {e}")
 
     filter = driver.find_element(By.ID,"collapseFilter")
     filter.click()
@@ -1229,16 +1248,21 @@ try:
     time.sleep(3)
 
     click_applyfilter = driver.find_element(By.ID,"applyFilterId")
+    time.sleep(2)
     click_applyfilter.click()
-    time.sleep(3)
+  
             
     
     username = data["report_partial"]["username"]
     input_field = driver.find_element(By.ID, "username")
     input_field.click()
+    time.sleep(2)
     input_field.send_keys(username)
     print(username)
     time.sleep(3)
+
+
+
 
 
     try:
@@ -1254,52 +1278,53 @@ try:
         print(f"Error occurred: {e}")
 
         
-    # button = driver.find_element(By.XPATH, "//button[@id='eyeReportId']")
-    # button.click()
+
 
     
-    print("The SVG element was not found within the given time.")
-    print("---------")
+    print("clicked eye_report")
+    time.sleep(2)
+    download_with_comment = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "downloadWithCmmtBtn"))
+    )
 
+    download_with_comment.click()
+  
 
-    try:
-        # Wait for the button to be visible and clickable
-        download_with_comment = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@class='daa_button d-flex mt-3']"))
-        )
-        
-        # Click the button
-        download_with_comment.click()
-        
-    except Exception as e:
-        print(f"Error occurred: {e}")
-       
-    print("-----2----")
-
-    time.sleep(10)
-    
-    try:
-        # Wait for the button to be visible and clickable
-        download_without_comment = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@class='daa_button d-flex mt-3 ms-3']"))
-        )
-        
-        # Click the button
-        download_without_comment.click()
-        
-    except Exception as e:
-        print(f"Error occurred: {e}")
     time.sleep(15)
+    download_without_comment = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, 'downloadWithOutCmmtBtn'))
+    )
+
+    # Click the button
+    time.sleep(5)
+    download_without_comment.click()
+    time.sleep(10)
+
 
     back_button = driver.find_element(By.XPATH, '//*[@id="backButtonId "]')
     back_button.click()
 
 
 
+#----complete assesment
 
-    time.sleep(4)
-    completed_link = driver.find_element(By.XPATH, '//a[text()="Completed"]')
-    completed_link.click()
+    link_report = WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((By.XPATH, "//a[contains(@href, '/report/rac-report') and .//p[text()='Report']]"))
+    )
+
+    # Click the element
+    time.sleep(2)
+    link_report.click()
+
+    completed_card = WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((By.ID, "completedCardId"))
+    )
+    time.sleep(2)
+    completed_card.click()
+    print("completed card")
+
+
+
 
     time.sleep(2)
     click_filter = driver.find_element(By.ID,"collapseFilter")
@@ -1332,48 +1357,39 @@ try:
     time.sleep(3)
     complete_input.send_keys(complete_username)
     time.sleep(3)
-
-    try:
-        # Wait until the button with id 'eyeReportId' is clickable
-        button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.ID, "eyeReportId"))
-        )
-
-        # Click the button
-        button.click()
-
-    except Exception as e:
-        print(f"Error occurred: {e}")
-
-
-    try:
-        # Wait for the button to be visible and clickable
-        download_with_comment = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@class='daa_button d-flex mt-3']"))
-        )
-        
-        # Click the button
-        download_with_comment.click()
-        
-    except Exception as e:
-        print(f"Error occurred: {e}")
-       
-    print("-----2----")
-
-    time.sleep(10)
     
-    try:
-        # Wait for the button to be visible and clickable
-        download_without_comment = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[@class='daa_button d-flex mt-3 ms-3']"))
-        )
+
+    eye_report_button = WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((By.ID, "eyeReportID"))
+    )
+
+    # Click the button
+    eye_report_button.click()
+
+  
         
-        # Click the button
-        download_without_comment.click()
-        
-    except Exception as e:
-        print(f"Error occurred: {e}")
+ 
+
+    
+    print("clicked eye_report")
+    time.sleep(2)
+    download_with_comment = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "downloadWithCmmtBtn"))
+    )
+
+    download_with_comment.click()
+  
+
     time.sleep(15)
+    download_without_comment = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, 'downloadWithOutCmmtBtn'))
+    )
+
+    # Click the button
+    time.sleep(5)
+    download_without_comment.click()
+    time.sleep(10)
+
 
     back_button = driver.find_element(By.XPATH, '//*[@id="backButtonId "]')
     back_button.click()
