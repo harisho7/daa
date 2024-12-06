@@ -1729,11 +1729,12 @@ try:
     weakness_button.click()
     print("click weakness 2")
 
-
+    time.sleep(4)
     textarea = WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.ID, "idWeaknessInput"))
     )
     textarea.clear()
+    time.sleep(2)
     textarea.send_keys("This is a part of weakness.")
     time.sleep(5)
     save_button = WebDriverWait(driver, 10).until(
