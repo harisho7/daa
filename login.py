@@ -496,10 +496,354 @@ try:
     # driver.execute_script("window.scrollBy(0, -1000);")
 
 
-    #---fill strength part 1 
+#     #---fill strength part 1 
+
+#     button = WebDriverWait(driver, 20).until(
+#         EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_0"))
+#     )
+
+#     # Click the button
+#     time.sleep(3)
+#     button.click()
+#     time.sleep(3)
+
+#     textarea = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
+#     )
+
+#     # Now clear the textarea and send the input
+#     textarea.clear()
+#     time.sleep(3)
+#     textarea.send_keys("textarea filled by DB")
+
+#     time.sleep(2)
+
+#     close_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idCloseBtn"))
+#     )
+#     close_button.click()
+#     print("closed")
+#     time.sleep(3)
+
+
+#     button = WebDriverWait(driver, 20).until(
+#         EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_0"))
+#     )
+
+#     # Click the button
+#     time.sleep(3)
+#     button.click()
+#     time.sleep(3)
+
+#     textarea = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
+#     )
+
+#     # Now clear the textarea and send the input
+#     textarea.clear()
+#     time.sleep(3)
+#     textarea.send_keys("database management system")
+
+#     time.sleep(2)
+
+
+#     save_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idSaveBtn"))
+#     )
+#     time.sleep(2)
+#     save_button.click()
+#     print("save changes successfully")
+#     time.sleep(5)
+
+
+# #--------------
+
+
+
+# #---start weakness -----1
+
+#     weakness_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idEmpWeaknessNLVLBtn_"))
+#     )
+#     time.sleep(3)
+#     weakness_button.click()
+#     print("click weakness")
+
+
+#     textarea = WebDriverWait(driver, 10).until(
+#         EC.visibility_of_element_located((By.ID, "idWeaknessInput"))
+#     )
+#     textarea.clear()
+#     textarea.send_keys("This is a sample weakness.")
+
+
+#     close_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idCloseBtn"))
+#     )
+#     time.sleep(3)
+#     close_button.click()
+#     print("closed btn")
+#     time.sleep(3)
+
+
+
+#     weakness_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idEmpWeaknessNLVLBtn_"))
+#     )
+#     time.sleep(3)
+#     weakness_button.click()
+#     print("click weakness")
+
+
+#     textarea = WebDriverWait(driver, 10).until(
+#         EC.visibility_of_element_located((By.ID, "idWeaknessInput"))
+#     )
+#     textarea.clear()
+#     textarea.send_keys("This is a part of weakness.")
+#     time.sleep(5)
+#     save_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idSaveBtn"))
+#     )
+#     save_button.click()
+#     print("save changeses weakness")
+#     time.sleep(5)
+
+
+
+    #---fill strength part 2
+
+#     button = WebDriverWait(driver, 20).until(
+#         EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_1"))
+#     )
+
+#     # Click the button
+#     time.sleep(3)
+#     button.click()
+#     time.sleep(3)
+
+#     textarea = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
+#     )
+
+#     # Now clear the textarea and send the input
+#     textarea.clear()
+#     time.sleep(3)
+#     textarea.send_keys("textarea filled by DB 2")
+
+#     time.sleep(2)
+
+#     close_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idCloseBtn"))
+#     )
+#     close_button.click()
+#     print("closed")
+#     time.sleep(3)
+
+
+#     button = WebDriverWait(driver, 20).until(
+#         EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_1"))
+#     )
+
+#     # Click the button
+#     time.sleep(3)
+#     button.click()
+#     time.sleep(3)
+
+#     textarea = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
+#     )
+
+#     # Now clear the textarea and send the input
+#     textarea.clear()
+#     time.sleep(3)
+#     textarea.send_keys("database management system")
+
+#     time.sleep(2)
+
+
+#     save_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idSaveBtn"))
+#     )
+#     time.sleep(2)
+#     save_button.click()
+#     print("save changes successfully 2")
+#     time.sleep(5)
+
+
+# #--------------
+
+
+
+# #---start weakness -----2
+
+#     weakness_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idEmpWeaknessNLVLBtn_"))
+#     )
+#     time.sleep(3)
+#     weakness_button.click()
+#     print("click weakness 2")
+
+
+#     textarea = WebDriverWait(driver, 10).until(
+#         EC.visibility_of_element_located((By.ID, "idWeaknessInput"))
+#     )
+#     textarea.clear()
+#     textarea.send_keys("This is a sample weakness.2")
+
+
+#     close_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idCloseBtn"))
+#     )
+#     time.sleep(3)
+#     close_button.click()
+#     print("closed btn")
+#     time.sleep(3)
+
+
+
+#     weakness_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idEmpWeaknessNLVLBtn_"))
+#     )
+#     time.sleep(3)
+#     weakness_button.click()
+#     print("click weakness 2")
+
+
+#     textarea = WebDriverWait(driver, 10).until(
+#         EC.visibility_of_element_located((By.ID, "idWeaknessInput"))
+#     )
+#     textarea.clear()
+#     textarea.send_keys("This is a part of weakness.")
+#     time.sleep(5)
+#     save_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idSaveBtn"))
+#     )
+#     save_button.click()
+#     print("save changeses weakness 2")
+#     time.sleep(5)
+
+
+
+
+#     #---fill strength part 3
+
+#     button = WebDriverWait(driver, 20).until(
+#         EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_2"))
+#     )
+
+#     # Click the button
+#     time.sleep(3)
+#     button.click()
+#     time.sleep(3)
+
+#     textarea = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
+#     )
+
+#     # Now clear the textarea and send the input
+#     textarea.clear()
+#     time.sleep(3)
+#     textarea.send_keys("textarea filled by DB 3")
+
+#     time.sleep(2)
+
+#     close_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idCloseBtn"))
+#     )
+#     close_button.click()
+#     print("closed")
+#     time.sleep(3)
+
+
+#     button = WebDriverWait(driver, 20).until(
+#         EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_2"))
+#     )
+
+#     # Click the button
+#     time.sleep(3)
+#     button.click()
+#     time.sleep(3)
+
+#     textarea = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
+#     )
+
+#     # Now clear the textarea and send the input
+#     textarea.clear()
+#     time.sleep(3)
+#     textarea.send_keys("database management system")
+
+#     time.sleep(2)
+
+
+#     save_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idSaveBtn"))
+#     )
+#     time.sleep(2)
+#     save_button.click()
+#     print("save changes successfully 3")
+#     time.sleep(5)
+
+
+# #--------------
+
+
+
+# #---start weakness -----3
+
+#     weakness_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idEmpWeaknessNLVLBtn_"))
+#     )
+#     time.sleep(3)
+#     weakness_button.click()
+#     print("click weakness 2")
+
+
+#     textarea = WebDriverWait(driver, 10).until(
+#         EC.visibility_of_element_located((By.ID, "idWeaknessInput"))
+#     )
+#     textarea.clear()
+#     textarea.send_keys("This is a sample weakness.3")
+
+
+#     close_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idCloseBtn"))
+#     )
+#     time.sleep(3)
+#     close_button.click()
+#     print("closed btn")
+#     time.sleep(3)
+
+
+
+#     weakness_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idEmpWeaknessNLVLBtn_"))
+#     )
+#     time.sleep(3)
+#     weakness_button.click()
+#     print("click weakness 3")
+
+
+#     textarea = WebDriverWait(driver, 10).until(
+#         EC.visibility_of_element_located((By.ID, "idWeaknessInput"))
+#     )
+#     textarea.clear()
+#     textarea.send_keys("This is a part of weakness.3")
+#     time.sleep(5)
+#     save_button = WebDriverWait(driver, 10).until(
+#         EC.element_to_be_clickable((By.ID, "idSaveBtn"))
+#     )
+#     save_button.click()
+#     print("save changeses weakness 3")
+#     time.sleep(5)
+
+
+
+
+    #---fill strength part 4
 
     button = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_0"))
+        EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_3"))
     )
 
     # Click the button
@@ -514,7 +858,7 @@ try:
     # Now clear the textarea and send the input
     textarea.clear()
     time.sleep(3)
-    textarea.send_keys("textarea filled by DB")
+    textarea.send_keys("textarea filled by DB 4")
 
     time.sleep(2)
 
@@ -527,7 +871,7 @@ try:
 
 
     button = WebDriverWait(driver, 20).until(
-        EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_0"))
+        EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_3"))
     )
 
     # Click the button
@@ -552,7 +896,7 @@ try:
     )
     time.sleep(2)
     save_button.click()
-    print("save changes successfully")
+    print("save changes successfully 4")
     time.sleep(5)
 
 
@@ -560,21 +904,21 @@ try:
 
 
 
-#---start weakness -----1
+#---start weakness -----4
 
     weakness_button = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.ID, "idEmpWeaknessNLVLBtn_"))
     )
     time.sleep(3)
     weakness_button.click()
-    print("click weakness")
+    print("click weakness 4")
 
 
     textarea = WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.ID, "idWeaknessInput"))
     )
     textarea.clear()
-    textarea.send_keys("This is a sample weakness.")
+    textarea.send_keys("This is a sample weakness.4")
 
 
     close_button = WebDriverWait(driver, 10).until(
@@ -592,27 +936,45 @@ try:
     )
     time.sleep(3)
     weakness_button.click()
-    print("click weakness")
+    print("click weakness 4")
 
 
     textarea = WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.ID, "idWeaknessInput"))
     )
     textarea.clear()
-    textarea.send_keys("This is a part of weakness.")
+    textarea.send_keys("This is a part of weakness.3")
     time.sleep(5)
     save_button = WebDriverWait(driver, 10).until(
         EC.element_to_be_clickable((By.ID, "idSaveBtn"))
     )
     save_button.click()
-    print("save changeses weakness")
+    print("save changeses weakness 4")
     time.sleep(5)
 
-    
+    #-----scroll up
     driver.execute_script("window.scrollBy(0, -5000);")
 
 
-    
+    #--report
+
+    link_report = WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((By.XPATH, "//a[contains(@href, '/report/rac-report') and .//p[text()='Report']]"))
+    )
+
+    # Click the element
+    time.sleep(2)
+    link_report.click()
+
+    WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, "orgCardId"))
+    ).click()
+    time.sleep(3)
+
+    WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, "downloadBtn"))
+    ).click()
+    time.sleep(10)
 
 
 
