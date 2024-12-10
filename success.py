@@ -168,7 +168,7 @@ try:
                 "#username": "Radhika"
             },
              "report_partial": {
-                 "username": "Shweta"
+                 "username": "134"
              },
              "report_complete":{
                  "username":"Aman"
@@ -1033,7 +1033,8 @@ try:
 
 
 # ##-----------------report_start click link-----
-        
+
+    
     try:
        
         report_link = WebDriverWait(driver, 10).until(
@@ -1045,7 +1046,6 @@ try:
 
     except Exception as e:
         print(f"Error: {e}")
-
 
     
     try:
@@ -1090,9 +1090,7 @@ try:
     input_field.send_keys(username)
     print(username)
     time.sleep(3)
-
-
-
+   
 
 
     try:
@@ -1133,6 +1131,352 @@ try:
     back_button = driver.find_element(By.XPATH, '//*[@id="backButtonId "]')
     back_button.click()
 
+    #------------apply filter
+
+    filter = driver.find_element(By.ID,"collapseFilter")
+    filter.click()
+    time.sleep(3)
+
+
+   
+    time.sleep(3)
+        
+    dropdown_element = driver.find_element(By.ID, "nomPosIdFilter_ID")
+
+    select = Select(dropdown_element)
+
+    select.select_by_visible_text("Data Scientist II")
+
+
+    time.sleep(3)
+
+    click_applyfilter = driver.find_element(By.ID,"applyFilterId")
+    time.sleep(2)
+    click_applyfilter.click()
+  
+            
+    
+    username = data["report_partial"]["username"]
+    input_field = driver.find_element(By.ID, "username")
+    input_field.click()
+    time.sleep(2)
+    input_field.send_keys(username)
+    print(username)
+    time.sleep(3)
+    
+#-----
+
+    try:
+      
+        button = driver.find_element(By.ID, "idRedirectIndividualPartial")
+        button.click()
+
+        print("Button clicked successfully!")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        time.sleep(2)
+
+    try:
+     
+        button = driver.find_element(By.ID, "idIndividualDownload")
+        time.sleep(2)
+        button.click()
+        time.sleep(10)
+
+        print("Button clicked successfully!")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        
+
+    try:
+      
+        button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "idbackButton"))
+        )
+        time.sleep(2)
+        button.click()
+        time.sleep(2)
+
+        print("Back button clicked successfully after wait!")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        
+
+
+
+
+#download--------
+
+
+
+    filter = driver.find_element(By.ID,"collapseFilter")
+    filter.click()
+    time.sleep(3)
+
+
+   
+    time.sleep(3)
+        
+    dropdown_element = driver.find_element(By.ID, "nomPosIdFilter_ID")
+
+    select = Select(dropdown_element)
+
+    select.select_by_visible_text("Data Scientist II")
+
+
+    time.sleep(3)
+
+    click_applyfilter = driver.find_element(By.ID,"applyFilterId")
+    time.sleep(2)
+    click_applyfilter.click()
+  
+            
+    
+    username = data["report_partial"]["username"]
+    input_field = driver.find_element(By.ID, "username")
+    input_field.click()
+    time.sleep(2)
+    input_field.send_keys(username)
+    print(username)
+    time.sleep(3)
+    button = driver.find_element(By.ID, "downloadReportBtnId")
+    button.click()
+
+    print("Button clicked successfully!")
+
+    download_with_comment = driver.find_element(By.ID, "btnWithCmmtP")
+    time.sleep(3)
+    download_with_comment.click()
+
+    print("Button clicked successfully!") 
+    time.sleep(15)
+
+    button = driver.find_element(By.ID, "downloadReportBtnId")
+    button.click()
+    time.sleep(3)
+
+    download_without_comment = driver.find_element(By.XPATH, "//button[@id='btnWithoutCmmtP']")
+    
+    download_without_comment.click()
+    time.sleep(10)
+
+#--completed
+
+    div_element_completed = driver.find_element(By.ID, "complete")
+    div_element_completed.click()
+    time.sleep(10)
+
+
+    try:
+       
+        collapse_filter_btn = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "collapseFilter"))
+        )
+        collapse_filter_btn.click()
+        print("Collapse Filter button clicked successfully!")
+    except Exception as e:
+        print(f"An error occurred while clicking 'collapseFilter': {e}")
+
+    time.sleep(1) 
+
+    try:
+       
+        select_element = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.ID, "nomPosIdFilter_ID"))
+        )
+     
+        select = Select(select_element)
+        select.select_by_visible_text("Full Stack Developer II")
+        print("Option 'Full Stack Developer II' selected successfully!")
+    except Exception as e:
+        print(f"An error occurred while selecting the option: {e}")
+
+    time.sleep(1)  
+
+    try:
+     
+        apply_filter_btn = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "applyFilterId"))
+        )
+        driver.execute_script("arguments[0].scrollIntoView();", apply_filter_btn) 
+        apply_filter_btn.click()
+        print("Apply Filter button clicked successfully!")
+    except Exception as e:
+        print(f"An error occurred while clicking 'applyFilterId': {e}")
+
+    time.sleep(1)  
+                
+    
+    username = data["report_complete"]["username"]
+    input_field = driver.find_element(By.ID, "username")
+    input_field.click()
+    time.sleep(2)
+    input_field.send_keys(username)
+    print(username)
+    time.sleep(3)
+
+
+    eye_report_button = WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((By.ID, "eyeReportID"))
+    )
+
+    eye_report_button.click()
+
+  
+        
+    print("clicked eye_report")
+    time.sleep(2)
+    download_with_comment = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.ID, "downloadWithCmmtBtn"))
+    )
+
+    download_with_comment.click()
+  
+
+    time.sleep(15)
+    download_without_comment = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, 'downloadWithOutCmmtBtn'))
+    )
+
+    time.sleep(5)
+    download_without_comment.click()
+    time.sleep(10)
+
+
+    back_button = driver.find_element(By.XPATH, '//*[@id="backButtonId "]') 
+    time.sleep(5)
+    back_button.click()
+
+
+    filter = driver.find_element(By.ID,"collapseFilter")
+    filter.click()
+    time.sleep(3)
+
+
+   
+    time.sleep(3)
+        
+    dropdown_element = driver.find_element(By.ID, "nomPosIdFilter_ID")
+
+    select = Select(dropdown_element)
+
+    select.select_by_visible_text("Full Stack Developer II")
+
+
+    time.sleep(3)
+
+    click_applyfilter = driver.find_element(By.ID,"applyFilterId")
+    time.sleep(2)
+    click_applyfilter.click()
+  
+            
+    
+    username = data["report_complete"]["username"]
+    input_field = driver.find_element(By.ID, "username")
+    input_field.click()
+    time.sleep(2)
+    input_field.send_keys(username)
+    print(username)
+    time.sleep(3)
+
+
+    try:
+       
+        button = driver.find_element(By.ID, "idRedirectIndividual")
+        button.click()
+
+        print("Button clicked successfully!")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        time.sleep(2)
+
+    try:
+      
+        button = driver.find_element(By.ID, "idIndividualDownload")
+        time.sleep(2)
+        button.click()
+        time.sleep(10)
+
+        print("Button clicked successfully!")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        
+
+    try:
+        # Wait until the button is clickable
+        button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.ID, "idbackButton"))
+        )
+        time.sleep(2)
+        button.click()
+        time.sleep(2)
+
+        print("Back button clicked successfully after wait!")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        
+
+
+
+#download--------
+
+
+
+    filter = driver.find_element(By.ID,"collapseFilter")
+    filter.click()
+    time.sleep(3)
+
+
+   
+    time.sleep(3)
+        
+    dropdown_element = driver.find_element(By.ID, "nomPosIdFilter_ID")
+
+    select = Select(dropdown_element)
+
+    select.select_by_visible_text("Full Stack Developer II")
+
+
+    time.sleep(3)
+
+    click_applyfilter = driver.find_element(By.ID,"applyFilterId")
+    time.sleep(2)
+    click_applyfilter.click()
+  
+            
+    
+    username = data["report_complete"]["username"]
+    input_field = driver.find_element(By.ID, "username")
+    input_field.click()
+    time.sleep(2)
+    input_field.send_keys(username)
+    print(username)
+    time.sleep(3)
+
+
+    button = driver.find_element(By.ID, "doownloadReportBtnId") 
+    button.click()
+
+    print("Button clicked successfully!")
+
+    download_with_comment_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, "btnWithCmmt"))
+    )
+    download_with_comment_button.click()
+    print("download with comment")
+
+    time.sleep(15)
+
+    button = driver.find_element(By.ID, "doownloadReportBtnId")
+    button.click()
+    time.sleep(3)
+
+    download_without_comment_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.ID, "btnWithoutCmmt"))
+    )
+    download_without_comment_button.click()
+
+    time.sleep(10)
 
 
 #----complete assesment
@@ -1476,7 +1820,7 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_0"))
     )
 
-    # Click the button
+    
     time.sleep(3)
     button.click()
     time.sleep(3)
@@ -1485,7 +1829,6 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
     )
 
-    # Now clear the textarea and send the input
     textarea.clear()
     time.sleep(3)
     textarea.send_keys("textarea filled by DB")
