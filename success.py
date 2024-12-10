@@ -212,8 +212,8 @@ try:
 
 
 
-#                                                                     #----------upcomming  click filter
-#                                                                       #-------- and apply filter success
+#              #----------upcomming  click filter
+#               #-------- and apply filter success
 
 
     filter_button = driver.find_element(By.XPATH, "//button[@id='collapseFilter']")
@@ -611,10 +611,7 @@ try:
     option.click()
     print(option.text)
 
-        #-------------- ---------------------------new code
-
-
-#-----------------------------------
+     
    
     print("Clicked the dropdown option Ashutosh")
 
@@ -640,12 +637,11 @@ try:
     apply_filter_button.click() 
     print(apply_filter_button.text)
 
-#---------------------------------------------#
-  
+
 
     username = data["user_data"]["username"]
     username_field = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#username")))
-    username_field.send_keys(username)  # Use the username from the data
+    username_field.send_keys(username) 
     time.sleep(2)
     print(username)
 
@@ -694,18 +690,18 @@ try:
                 except Exception as e:
                     print(f"Error while filling '{key}' in section {i + 1}: {e}")
 
-            # Handle radio button and Save & Next button, except for the last section
-            if i < len(data["user_data"]["my_list"]) - 1:  # Check if it's not the last section
+           
+            if i < len(data["user_data"]["my_list"]) - 1: 
                 try:
                
-                    radio_button = wait.until(EC.element_to_be_clickable((By.ID, "score3")))  # Change ID as necessary
+                    radio_button = wait.until(EC.element_to_be_clickable((By.ID, "score3")))  
                     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", radio_button)
-                    time.sleep(2)  # Optional wait
+                    time.sleep(2)
                     radio_button.click()
 
                     save_next_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Save & Next')]")))
                     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", save_next_button)
-                    time.sleep(2)  # Optional wait
+                    time.sleep(2) 
                     save_next_button.click()
 
              
@@ -959,7 +955,7 @@ try:
 
 
 
-# #                                   #------------mindset click success-----------#
+# # #------------mindset click success-----------#
 
                                 
     try:
@@ -992,7 +988,6 @@ try:
     except Exception as e:
         print("Error sending value to username field:", e)  
 
-# #---------------mindset DOWNLOAD PROCESS SUCCESSFULLY----------------#
 
 
 
@@ -1037,25 +1032,15 @@ try:
         print(f"Error occurred: {e}")
 
 
-# #-------------------Mindset_End--------
-
-
-
-
-
-# #             #-----------------report_start click link-----
-
-
-        
-        
+# ##-----------------report_start click link-----
         
     try:
-        # Wait for the "Report" link to be clickable
+       
         report_link = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//a[./p[text()='Report']]"))
         )
         
-        # Click the element
+      
         report_link.click()
 
     except Exception as e:
@@ -1064,12 +1049,11 @@ try:
 
     
     try:
-        # Wait for the element with the id 'partialCompleteId' to be clickable
+      
         partial_complete_element = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.ID, 'partialCompleteId'))
         )
         
-        # Click the element
         time.sleep(2)
         partial_complete_element.click()
 
@@ -1086,13 +1070,9 @@ try:
         
     dropdown_element = driver.find_element(By.ID, "nomPosIdFilter_ID")
 
-    # Create a Select object for the dropdown
     select = Select(dropdown_element)
 
-    # Select the option by visible text
     select.select_by_visible_text("Data Scientist II")
-
-
 
 
     time.sleep(3)
@@ -1116,12 +1096,12 @@ try:
 
 
     try:
-        # Wait until the button with id 'eyeReportId' is clickable
+     
         button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.ID, "eyeReportId"))
         )
 
-        # Click the button
+       
         button.click()
 
     except Exception as e:
@@ -1145,7 +1125,6 @@ try:
         EC.element_to_be_clickable((By.ID, 'downloadWithOutCmmtBtn'))
     )
 
-    # Click the button
     time.sleep(5)
     download_without_comment.click()
     time.sleep(10)
@@ -1162,7 +1141,7 @@ try:
         EC.element_to_be_clickable((By.XPATH, "//a[contains(@href, '/report/rac-report') and .//p[text()='Report']]"))
     )
 
-    # Click the element
+
     time.sleep(2)
     link_report.click()
 
@@ -1173,21 +1152,18 @@ try:
     completed_card.click()
     print("completed card")
 
-
-
-
     time.sleep(2)
     click_filter = driver.find_element(By.ID,"collapseFilter")
     click_filter.click()
     time.sleep(2)
         
     try:
-        # Wait for the dropdown to be visible and clickable
+
         click_nominated = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.ID, "nomPosIdFilter_ID"))
         )
         
-        # Create a Select object and choose the option
+      
         select = Select(click_nominated)
         select.select_by_visible_text("Full Stack Developer II")
         
@@ -1213,14 +1189,10 @@ try:
         EC.element_to_be_clickable((By.ID, "eyeReportID"))
     )
 
-    # Click the button
     eye_report_button.click()
 
   
         
- 
-
-    
     print("clicked eye_report")
     time.sleep(2)
     download_with_comment = WebDriverWait(driver, 10).until(
@@ -1235,7 +1207,6 @@ try:
         EC.element_to_be_clickable((By.ID, 'downloadWithOutCmmtBtn'))
     )
 
-    # Click the button
     time.sleep(5)
     download_without_comment.click()
     time.sleep(10)
@@ -1252,7 +1223,6 @@ try:
         EC.element_to_be_clickable((By.XPATH, "//a[contains(@href, '/report/rac-report') and .//p[text()='Report']]"))
     )
 
-    # Click the element
     time.sleep(2)
     link_report.click()
 
@@ -1260,7 +1230,6 @@ try:
         EC.element_to_be_clickable((By.ID, "departmentCardId"))
     )
 
-    # Click the div element
     department_card.click()
     time.sleep(3)
     driver.execute_script("window.scrollBy(0, 1000);")
@@ -1281,7 +1250,6 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
     )
 
-    # Now clear the textarea and send the input
     textarea.clear()
     time.sleep(3)
     textarea.send_keys("textarea filled by DB")
@@ -1300,7 +1268,6 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthDepBtn_0"))
     )
 
-    # Click the button
     time.sleep(3)
     button.click()
     time.sleep(3)
@@ -1309,7 +1276,6 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
     )
 
-    # Now clear the textarea and send the input
     textarea.clear()
     time.sleep(3)
     textarea.send_keys("database management system")
@@ -1324,10 +1290,6 @@ try:
     save_button.click()
     print("save changes successfully")
     time.sleep(5)
-
-
-#--------------
-
 
 
 #---start weakness -----1
@@ -1379,9 +1341,6 @@ try:
     time.sleep(5)
 
     
-
-
-
     #--------2nd
 
 
@@ -1391,7 +1350,6 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthDepBtn_1"))
     )
 
-    # Click the button
     time.sleep(3)
     button.click()
     time.sleep(3)
@@ -1400,7 +1358,6 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
     )
 
-    # Now clear the textarea and send the input
     textarea.clear()
     time.sleep(3)
     textarea.send_keys("textarea filled by DB 2")
@@ -1419,7 +1376,6 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthDepBtn_1"))
     )
 
-    # Click the button
     time.sleep(3)
     button.click()
     time.sleep(3)
@@ -1428,7 +1384,6 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
     )
 
-    # Now clear the textarea and send the input
     textarea.clear()
     time.sleep(3)
     textarea.send_keys("database management system ")
@@ -1444,8 +1399,6 @@ try:
     print("save changes successfully 2")
     time.sleep(5)
 
-
-#--------------
 
 
 
@@ -1504,7 +1457,6 @@ try:
         EC.element_to_be_clickable((By.XPATH, "//a[contains(@href, '/report/rac-report') and .//p[text()='Report']]"))
     )
 
-    # Click the element
     time.sleep(2)
     link_report.click()
 
@@ -1513,7 +1465,7 @@ try:
     )
     n_level_card.click()
     time.sleep(5)
-    driver.execute_script("window.scrollBy(0, 5000);")  # Scroll by 5000px
+    driver.execute_script("window.scrollBy(0, 5000);")
 
     time.sleep(2)
 
@@ -1761,7 +1713,7 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
     )
 
-    # Now clear the textarea and send the input
+   
     textarea.clear()
     time.sleep(3)
     textarea.send_keys("textarea filled by DB 3")
@@ -1780,7 +1732,7 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_2"))
     )
 
-    # Click the button
+    
     time.sleep(3)
     button.click()
     time.sleep(3)
@@ -1789,7 +1741,7 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
     )
 
-    # Now clear the textarea and send the input
+   
     textarea.clear()
     time.sleep(3)
     textarea.send_keys("database management system")
@@ -1804,11 +1756,6 @@ try:
     save_button.click()
     print("save changes successfully 3")
     time.sleep(5)
-
-
-#--------------
-
-
 
 #---start weakness -----3
 
@@ -1866,7 +1813,6 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_3"))
     )
 
-    # Click the button
     time.sleep(3)
     button.click()
     time.sleep(3)
@@ -1875,7 +1821,6 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
     )
 
-    # Now clear the textarea and send the input
     textarea.clear()
     time.sleep(3)
     textarea.send_keys("textarea filled by DB 4")
@@ -1894,7 +1839,6 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthNLVLBtn_3"))
     )
 
-    # Click the button
     time.sleep(3)
     button.click()
     time.sleep(3)
@@ -1903,7 +1847,6 @@ try:
         EC.element_to_be_clickable((By.ID, "idStrengthInput"))
     )
 
-    # Now clear the textarea and send the input
     textarea.clear()
     time.sleep(3)
     textarea.send_keys("database management system")
@@ -1918,11 +1861,6 @@ try:
     save_button.click()
     print("save changes successfully 4")
     time.sleep(5)
-
-
-#--------------
-
-
 
 #---start weakness -----4
 
@@ -1978,14 +1916,12 @@ try:
     driver.execute_script("window.scrollBy(0, -5000);")
 
 
-
-    #--report
+    #--report click
 
     link_report = WebDriverWait(driver, 20).until(
         EC.element_to_be_clickable((By.XPATH, "//a[contains(@href, '/report/rac-report') and .//p[text()='Report']]"))
     )
 
-    # Click the element
     time.sleep(2)
     link_report.click()
 
@@ -2014,7 +1950,7 @@ try:
 
 
 
-    time.sleep(15)  # Wait for 15 seconds to view results
+    time.sleep(15)
 finally:
     # Close the browser
-    driver.quit()  # Ensure the browser closes
+    driver.quit()
